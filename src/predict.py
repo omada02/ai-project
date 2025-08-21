@@ -1,8 +1,11 @@
-import torch
-from src.model import FashionMNISTModel
-from torchvision import transforms
-from PIL import Image
 import sys
+
+import torch
+from PIL import Image
+from torchvision import transforms
+
+from src.model import FashionMNISTModel
+
 
 def predict(image_path):
     model = FashionMNISTModel()
@@ -16,7 +19,10 @@ def predict(image_path):
     with torch.no_grad():
         output = model(image_tensor)
         prediction = torch.argmax(output, dim=1).item()
+
     return prediction
+
 
 if __name__ == "__main__":
     print(predict(sys.argv[1]))
+
