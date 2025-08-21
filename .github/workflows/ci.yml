@@ -27,11 +27,9 @@ jobs:
         pip install pytest flake8
 
     - name: Run flake8
-      run: |
-        flake8 src tests
+      run: flake8 src tests
 
     - name: Run tests
       env:
-        PYTHONPATH: ${{ github.workspace }}/src
-      run: |
-        pytest tests
+        PYTHONPATH: ${{ github.workspace }}
+      run: pytest tests
