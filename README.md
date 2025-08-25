@@ -8,7 +8,7 @@
 ```bash
 git clone https://github.com/omada02/ai-project.git
 cd ai-project/AI
-
+```
 
 ### 2. Crea ed esegui (senza Docker)
 ```bash
