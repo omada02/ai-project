@@ -5,7 +5,7 @@ import torchvision
 from torch.utils.data import DataLoader
 from torchvision import transforms
 
-from src.model import FashionMNISTModel
+from model import FashionMNISTModel
 
 
 def train_model():
