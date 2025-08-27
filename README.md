@@ -14,8 +14,11 @@ cd ai-project/AI
 ```bash
 pip install -r requirements.txt
 pip install -e .
-python src/train.py
-python app/gradio_app.py
+python src/train.py           # Addestra il modello (opzionale)
+python src/save_fashionmnist_images.py  # Salva immagini di esempio
+PYTHONPATH=. python src/predict.py fashionmnist_examples/0_label9.png
+PYTHONPATH=. python src/predict.py fashionmnist_examples/4_label6.png
+
 ```
 
 ### 3. Oppure con Docker
