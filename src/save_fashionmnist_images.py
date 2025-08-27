@@ -6,7 +6,9 @@ import os
 transform = transforms.ToTensor()
 
 # Scarica dataset di test
-test_dataset = FashionMNIST(root="./data", train=False, download=True, transform=transform)
+test_dataset = FashionMNIST(
+    root="./data", train=False, download=True, transform=transform
+)
 
 # Cartella dove salvare le immagini
 os.makedirs("fashionmnist_examples", exist_ok=True)
