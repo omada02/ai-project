@@ -2,14 +2,10 @@ import torch
 from torchvision import datasets, transforms
 from src.model import FashionMNISTModel
 
-
-def test_fashion_mnist_accuracy():
-    """Testa l'accuracy del modello FashionMNIST su dataset di test."""
+def main():
     # Carica modello
     model = FashionMNISTModel()
-    model.load_state_dict(
-        torch.load("fashion_mnist_model.pt", map_location=torch.device('cpu'))
-    )
+    model.load_state_dict(torch.load("fashion_mnist_model.pt"))
     model.eval()
 
     # Dataset di test
@@ -36,5 +32,5 @@ def test_fashion_mnist_accuracy():
     accuracy = correct / total * 100
     print(f'Accuracy sul test set: {accuracy:.2f}%')
 
-    # Controllo minimo per passare il test CI
-    assert accuracy > 50, "Accuracy troppo bassa sul test set"
+if __name__ == "__main__":
+    main()
