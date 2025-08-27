@@ -15,13 +15,17 @@ classes = {
     6: "Shirt",
     7: "Sneaker",
     8: "Bag",
-    9: "Ankle boot"
+    9: "Ankle boot",
 }
 
+
 def predict(image_path):
+    """Predice la classe di un'immagine FashionMNIST."""
     # Carica modello
     model = FashionMNISTModel()
-    model.load_state_dict(torch.load("fashion_mnist_model.pt", map_location=torch.device('cpu')))
+    model.load_state_dict(
+        torch.load("fashion_mnist_model.pt", map_location=torch.device("cpu"))
+    )
     model.eval()
 
     # Preprocessing immagine
@@ -36,9 +40,11 @@ def predict(image_path):
 
     return classes[prediction]
 
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python predict.py <image_path>")
         sys.exit(1)
+
     result = predict(sys.argv[1])
     print(f"Predicted class: {result}")
