@@ -7,7 +7,7 @@
 ### 1. Clona la repo
 ```bash
 git clone https://github.com/omada02/ai-project.git
-cd ai-project/AI
+cd ai-project
 ```
 
 ### 2. Crea ed esegui (senza Docker)
