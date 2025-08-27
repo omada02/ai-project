@@ -1,28 +1,23 @@
 import torch
 from torchvision import datasets, transforms
 from src.model import FashionMNISTModel
-from pathlib import Path
-import pytest  # opzionale, serve solo per evidenziare test compatibili
 
-def main():
-    model_path = "fashion_mnist_model.pt"
 
-    # Controlla che il file esista
-    if not Path(model_path).exists():
-        print(f"File modello '{model_path}' non trovato!")
-        return
-
+def test_fashion_mnist_accuracy():
+    """Testa l'accuracy del modello FashionMNIST su dataset di test."""
     # Carica modello
     model = FashionMNISTModel()
-    model.load_state_dict(torch.load(model_path))
+    model.load_state_dict(
+        torch.load("fashion_mnist_model.pt", map_location=torch.device('cpu'))
+    )
     model.eval()
 
     # Dataset di test
     test_dataset = datasets.FashionMNIST(
-        root="./data",
+        root='./data',
         train=False,
         download=True,
-        transform=transforms.ToTensor(),
+        transform=transforms.ToTensor()
     )
     test_loader = torch.utils.data.DataLoader(
         test_dataset, batch_size=64, shuffle=False
@@ -39,26 +34,7 @@ def main():
             correct += (predicted == labels).sum().item()
 
     accuracy = correct / total * 100
-    print(f"Accuracy sul test set: {accuracy:.2f}%")
-    return accuracy  # utile per test
+    print(f'Accuracy sul test set: {accuracy:.2f}%')
 
-
-# Funzione di test per GitHub Actions
-def test_model_runs():
-    """Verifica che il modello possa fare inferenza su un batch senza errori"""
-    model = FashionMNISTModel()
-    model.eval()
-
-    test_dataset = datasets.FashionMNIST(
-        root="./data", train=False, download=True, transform=transforms.ToTensor()
-    )
-    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=8)
-    images, labels = next(iter(test_loader))
-    outputs = model(images)
-    
-    # Controllo minimo
-    assert outputs.shape[0] == labels.shape[0]
-
-    
-if __name__ == "__main__":
-    main()
+    # Controllo minimo per passare il test CI
+    assert accuracy > 50, "Accuracy troppo bassa sul test set"
