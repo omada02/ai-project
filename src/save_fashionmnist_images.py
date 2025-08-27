@@ -1,6 +1,5 @@
 from torchvision.datasets import FashionMNIST
 from torchvision import transforms
-from PIL import Image
 import os
 
 # Trasformazione base (MNIST è già 28x28, scala di grigi)
@@ -17,7 +16,6 @@ for i in range(10):
     img_tensor, label = test_dataset[i]
     # Trasforma tensore in immagine PIL
     img = transforms.ToPILImage()(img_tensor)
-    # Salva immagine con nome che include l’etichetta
+    # Salva immagine con nome che include l'etichetta
     img.save(f"fashionmnist_examples/{i}_label{label}.png")
     print(f"Salvata image {i} con label {label}")
-
